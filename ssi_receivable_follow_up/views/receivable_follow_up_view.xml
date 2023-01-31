@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Copyright 2023 OpenSynergy Indonesia-->
+<!--Copyright 2023 PT. Simetri Sinergi Indonesia-->
+<!--License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).-->
+<odoo>
+    <record id="receivable_follow_up_view_tree" model="ir.ui.view">
+        <field name="name">receivable_follow_up - Tree</field>
+        <field name="model">receivable_follow_up</field>
+        <field
+            name="inherit_id"
+            ref="ssi_transaction_mixin.mixin_transaction_view_tree"
+        />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="field[@name='company_id']" position="after">
+                    <field name="type_id" />
+                    <field name="currency_id" />
+                    <field name="collector_id" widget="many2one_avatar" />
+                    <field name="date_start" />
+                    <field name="date_end" />
+                    <field name="amount_due" />
+                    <field name="amount_collected" />
+                    <field name="collection_rate" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="receivable_follow_up_view_search" model="ir.ui.view">
+        <field name="name">receivable_follow_up - Search</field>
+        <field name="model">receivable_follow_up</field>
+        <field
+            name="inherit_id"
+            ref="ssi_transaction_mixin.mixin_transaction_view_search"
+        />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <data />
+        </field>
+    </record>
+
+    <record id="receivable_follow_up_view_form" model="ir.ui.view">
+        <field name="name">receivable_follow_up - Form</field>
+        <field name="model">receivable_follow_up</field>
+        <field
+            name="inherit_id"
+            ref="ssi_transaction_mixin.mixin_transaction_view_form"
+        />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="type_id" />
+                    <field name="currency_id" />
+                    <field name="collector_id" widget="many2one_avatar" />
+                </xpath>
+                <xpath expr="//group[@name='header_right']" position="inside">
+                    <field name="date_start" />
+                    <field name="date_end" />
+                </xpath>
+                <xpath expr="//page[1]" position="before">
+                    <page name="receivable" string="Receivable">
+                        <group>
+                            <button
+                                name="action_populate"
+                                string="Populate"
+                                type="object"
+                                confirm="Populate Datas. Are you sure?"
+                                order="1"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('state','!=', 'draft')]}"
+                                colspan="2"
+                                icon="fa-gears"
+                            />
+                        </group>
+                        <field name="detail_ids" force_save="1">
+                            <tree>
+                                <field name="invoice_id" />
+                                <field name="partner_id"/>
+                                <field name="date_invoice" />
+                                <field name="date_due" />
+                                <field name="amount_total" />
+                                <field name="amount_residual" />
+                                <field name="amount_collected" />
+                                <field name="amount_diff" />
+                            </tree>
+                            <form>
+                                <group name="form_receivable" colspan="4" col="2">
+                                    <group name="form_receivable1" colspan="1" col="2">
+                                        <field name="invoice_id" />
+                                        <field name="partner_id"/>
+                                        <field name="date_invoice" />
+                                        <field name="date_due" />
+                                    </group>
+                                    <group name="form_receivable2" colspan="1" col="2">
+                                        <field name="amount_total" />
+                                        <field name="amount_residual" />
+                                        <field name="amount_collected" />
+                                        <field name="amount_diff" />
+                                    </group>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//group[@name='footer_left']" position="inside">
+                    <field name="amount_due" />
+                    <field name="amount_collected" />
+                    <field name="collection_rate" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="receivable_follow_up_action" model="ir.actions.act_window">
+        <field name="name">Follow Ups</field>
+        <field name="res_model">receivable_follow_up</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Follow Ups
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem
+        id="receivable_follow_up_menu"
+        name="Follow Ups"
+        parent="ssi_financial_accounting.menu_account_receivable"
+        groups="receivable_follow_up_viewer_group"
+        action="receivable_follow_up_action"
+        sequence="70"
+    />
+</odoo>

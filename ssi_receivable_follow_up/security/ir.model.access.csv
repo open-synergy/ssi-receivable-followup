@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_receivable_follow_up_type_configurator,receivable_follow_up_type - configurator,model_receivable_follow_up_type,receivable_follow_up_type_group,1,1,1,1
+access_receivable_follow_up_type_all,receivable_follow_up_type - all,model_receivable_follow_up_type,,1,0,0,0
+access_receivable_follow_up_all,receivable_follow_up - all,model_receivable_follow_up,,1,0,0,0
+access_receivable_follow_up_viewer,receivable_follow_up - viewer,model_receivable_follow_up,receivable_follow_up_viewer_group,1,0,0,0
+access_receivable_follow_up_user,receivable_follow_up - user,model_receivable_follow_up,receivable_follow_up_user_group,1,1,1,1
+access_receivable_follow_up_detail_all,receivable_follow_up.detail - all,model_receivable_follow_up_detail,,1,0,0,0
+access_receivable_follow_up_detail_viewer,receivable_follow_up.detail - viewer,model_receivable_follow_up_detail,receivable_follow_up_viewer_group,1,0,0,0
+access_receivable_follow_up_detail_user,receivable_follow_up.detail - user,model_receivable_follow_up_detail,receivable_follow_up_user_group,1,1,1,1
