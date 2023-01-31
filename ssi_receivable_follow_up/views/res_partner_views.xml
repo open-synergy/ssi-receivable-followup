@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 OpenSynergy Indonesia
+     Copyright 2023 PT. Simetri Sinergi Indonesia
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+<record id="res_partner_view_form" model="ir.ui.view">
+    <field name="name">res.partner form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="mode">extension</field>
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="////group[@name='sale']//field[@name='user_id']" position="after">
+                <field name="collector_id"/>
+            </xpath>
+        </data>
+    </field>
+</record>
+</odoo>
