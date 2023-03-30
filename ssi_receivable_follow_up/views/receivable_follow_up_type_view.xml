@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Copyright 2023 OpenSynergy Indonesia-->
+<!--Copyright 2023 PT. Simetri Sinergi Indonesia-->
+<!--License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).-->
+<odoo>
+    <record id="receivable_follow_up_type_view_tree" model="ir.ui.view">
+        <field name="name">receivable_follow_up_type - Tree</field>
+        <field name="model">receivable_follow_up_type</field>
+        <field
+            name="inherit_id"
+            ref="ssi_master_data_mixin.mixin_master_data_view_tree"
+        />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <data />
+        </field>
+    </record>
+
+    <record id="receivable_follow_up_type_view_search" model="ir.ui.view">
+        <field name="name">receivable_follow_up_type - Search</field>
+        <field name="model">receivable_follow_up_type</field>
+        <field
+            name="inherit_id"
+            ref="ssi_master_data_mixin.mixin_master_data_view_search"
+        />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <data />
+        </field>
+    </record>
+
+    <record id="receivable_follow_up_type_view_form" model="ir.ui.view">
+        <field name="name">receivable_follow_up_type - Form</field>
+        <field name="model">receivable_follow_up_type</field>
+        <field
+            name="inherit_id"
+            ref="ssi_master_data_mixin.mixin_master_data_view_form"
+        />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name="min_date_due" />
+                    <field name="max_date_due" />
+                    <field name="allowed_account_ids" widget="many2many_tags" />
+                    <field name="allowed_journal_ids" widget="many2many_tags" />
+                    <field name="allowed_collector_ids" widget="many2many_avatar" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="receivable_follow_up_type_action" model="ir.actions.act_window">
+        <field name="name">Follow Up Types</field>
+        <field name="res_model">receivable_follow_up_type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Follow Up Type
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem
+        id="receivable_follow_up_type_menu"
+        name="Follow Up Types"
+        parent="menu_finance_config_follow_up"
+        action="receivable_follow_up_type_action"
+        sequence="12"
+    />
+</odoo>
