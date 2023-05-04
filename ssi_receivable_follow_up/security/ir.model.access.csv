@@ -1,7 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_receivable_follow_up_type_employee,receivable_follow_up_type – employee,model_receivable_follow_up_type,base.group_user,1,1,1,1
+access_receivable_follow_up_type_employee,receivable_follow_up_type - employee,model_receivable_follow_up_type,base.group_user,1,1,1,1
 access_receivable_follow_up_type_all,receivable_follow_up_type - all,model_receivable_follow_up_type,,1,0,0,0
 access_receivable_follow_up_all,receivable_follow_up - all,model_receivable_follow_up,,1,0,0,0
-access_receivable_follow_up_employee,receivable_follow_up – employee,model_receivable_follow_up,base.group_user,1,1,1,1
+access_receivable_follow_up_employee,receivable_follow_up - employee,model_receivable_follow_up,base.group_user,1,1,1,1
 access_receivable_follow_up_detail_all,receivable_follow_up.detail - all,model_receivable_follow_up_detail,,1,0,0,0
-access_receivable_follow_up_detail_employee,receivable_follow_up.detail – employee,model_receivable_follow_up_detail,base.group_user,1,1,1,1
+access_receivable_follow_up_detail_employee,receivable_follow_up.detail - employee,model_receivable_follow_up_detail,base.group_user,1,1,1,1
