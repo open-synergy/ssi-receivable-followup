@@ -3,7 +3,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import _, api, fields, models
-from odoo.exceptions import Warnins as UserError
+from odoo.exceptions import UserError
 
 
 class ReceivableFollowUp(models.Model):
@@ -178,7 +178,9 @@ class ReceivableFollowUp(models.Model):
                 amount_collected = amount_collected + detail.amount_collected
             record.amount_due = amount_due
             record.amount_collected = amount_collected
-            record.collection_rate = amount_collected and amount_collected / amount_due
+            record.collection_rate = (
+                amount_due != 0.0 and amount_collected / amount_due or 0.0
+            ) * 100.0
 
     @api.multi
     def _prepare_move_line_criteria(self):
@@ -206,11 +208,17 @@ class ReceivableFollowUp(models.Model):
         self.detail_ids.unlink()
         lines = self.env["account.move.line"].search(self._prepare_move_line_criteria())
         for line in lines:
+            residual = (
+                line.currency_id
+                and line.amount_residual_currency
+                or line.amount_residual
+            )
             self.env["receivable_follow_up.detail"].create(
                 {
                     "invoice_id": line.invoice_id.id,
                     "move_line_id": line.id,
                     "follow_up_id": self.id,
+                    "amount_residual": residual,
                 }
             )
 

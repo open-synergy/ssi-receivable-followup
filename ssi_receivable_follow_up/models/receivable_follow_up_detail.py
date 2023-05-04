@@ -55,9 +55,9 @@ class ReceivableFollowUpDetail(models.Model):
     )
     amount_residual = fields.Monetary(
         string="Amount Residual",
-        related=False,
-        store=True,
         currency_field="currency_id",
+        compute="_compute_amount",
+        store=True,
     )
     amount_collected = fields.Monetary(
         string="Amount Collected",
@@ -74,17 +74,33 @@ class ReceivableFollowUpDetail(models.Model):
 
     @api.depends(
         "move_line_id",
+        "move_line_id.amount_residual",
         "move_line_id.amount_residual_currency",
     )
     def _compute_amount(self):
         for record in self:
-            result = 0.0
+            residual = collected = collected_residual = 0.0
+            ml = self.move_line_id
+            criteria = [
+                ("debit_move_id", "=", record.move_line_id.id),
+                ("credit_move_id.date", "<", record.follow_up_id.date_start),
+            ]
+            for line in self.env["account.partial.reconcile"].search(criteria):
+                collected_residual += (
+                    line.currency_id and line.amount_currency or line.amount
+                )
+
+            residual = (
+                ml.currency_id and ml.amount_currency or ml.debit
+            ) - collected_residual
+
             criteria = [
                 ("debit_move_id", "=", record.move_line_id.id),
                 ("credit_move_id.date", ">=", record.follow_up_id.date_start),
                 ("credit_move_id.date", "<=", record.follow_up_id.date_end),
             ]
             for line in self.env["account.partial.reconcile"].search(criteria):
-                result += abs(line.credit_move_id.amount_currency)
-            record.amount_collected = result
-            record.amount_diff = record.amount_residual - record.amount_collected
+                collected += line.currency_id and line.amount_currency or line.amount
+            record.amount_collected = collected
+            record.amount_residual = residual
+            record.amount_diff = residual - collected
