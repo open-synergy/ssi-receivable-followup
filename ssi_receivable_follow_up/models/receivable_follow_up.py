@@ -173,7 +173,7 @@ class ReceivableFollowUp(models.Model):
         for record in self:
             amount_due = 0.0
             amount_collected = 0.0
-            for detail in self.detail_ids:
+            for detail in record.detail_ids:
                 amount_due = amount_due + detail.amount_residual
                 amount_collected = amount_collected + detail.amount_collected
             record.amount_due = amount_due
@@ -190,9 +190,9 @@ class ReceivableFollowUp(models.Model):
             ("journal_id", "in", self.type_id.allowed_journal_ids.ids),
             ("account_id", "in", self.type_id.allowed_account_ids.ids),
             ("move_id.state", "=", "posted"),
-            ("partner_id.collector_id.id", "=", self.collector_id.id),
             ("invoice_id.days_overdue", ">=", self.type_id.min_date_due),
             ("invoice_id.days_overdue", "<=", self.type_id.max_date_due),
+            ("invoice_id.collector_id.id", "=", self.collector_id.id),
         ]
 
         return result
