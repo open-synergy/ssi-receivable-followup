@@ -4,7 +4,7 @@
 
 {
     "name": "Receivable Follow Up",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.1.0",
     "category": "Accounting",
     "website": "https://simetri-sinergi.id",
     "author": "PT. Simetri Sinergi Indonesia, OpenSynergy Indonesia",
@@ -29,6 +29,7 @@
         "views/receivable_follow_up_type_view.xml",
         "views/receivable_follow_up_view.xml",
         "views/res_partner_views.xml",
+        "views/account_invoice_views.xml",
     ],
     "demo": [],
     "images": [],

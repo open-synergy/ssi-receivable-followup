@@ -80,7 +80,7 @@ class ReceivableFollowUpDetail(models.Model):
     def _compute_amount(self):
         for record in self:
             residual = collected = collected_residual = 0.0
-            ml = self.move_line_id
+            ml = record.move_line_id
             criteria = [
                 ("debit_move_id", "=", record.move_line_id.id),
                 ("credit_move_id.date", "<", record.follow_up_id.date_start),

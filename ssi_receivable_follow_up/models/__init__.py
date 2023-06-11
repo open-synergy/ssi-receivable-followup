@@ -7,4 +7,5 @@ from . import (
     receivable_follow_up_detail,
     receivable_follow_up_type,
     res_partner,
+    account_invoice,
 )
