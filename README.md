@@ -14,7 +14,11 @@ ssi-receivable-followup
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[ssi_receivable_follow_up](ssi_receivable_follow_up/) | 14.0.1.0.1 |  | Receivable Follow Up
 
 [//]: # (end addons)
 
