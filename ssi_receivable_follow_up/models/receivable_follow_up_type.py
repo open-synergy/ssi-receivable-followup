@@ -1,6 +1,6 @@
 # Copyright 2023 OpenSynergy Indonesia
 # Copyright 2023 PT. Simetri Sinergi Indonesia
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import fields, models
 
@@ -31,11 +31,5 @@ class ReceivableFollowUpType(models.Model):
         column1="type_id",
         column2="account_id",
     )
-    max_date_due = fields.Integer(
-        string="Max Date Due",
-        required=True
-    )
-    min_date_due = fields.Integer(
-        string="Min Date Due",
-        required=True
-    )
+    max_date_due = fields.Integer(string="Max Date Due", required=True)
+    min_date_due = fields.Integer(string="Min Date Due", required=True)

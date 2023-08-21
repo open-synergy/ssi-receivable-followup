@@ -1,6 +1,6 @@
 # Copyright 2023 OpenSynergy Indonesia
 # Copyright 2023 PT. Simetri Sinergi Indonesia
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
 
@@ -179,8 +179,10 @@ class ReceivableFollowUp(models.Model):
         self.detail_ids.unlink()
         lines = self.env["account.move.line"].search(self._prepare_move_line_criteria())
         for line in lines:
-            self.env["receivable_follow_up.detail"].create({
-                "invoice_id": line.id,
-                "follow_up_id": self.id,
-                "amount_residual": line.amount_residual_currency,
-                })
+            self.env["receivable_follow_up.detail"].create(
+                {
+                    "invoice_id": line.id,
+                    "follow_up_id": self.id,
+                    "amount_residual": line.amount_residual_currency,
+                }
+            )
