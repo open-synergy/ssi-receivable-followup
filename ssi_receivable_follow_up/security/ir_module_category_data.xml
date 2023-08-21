@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2023 OpenSynergy Indonesia
      Copyright 2023 PT. Simetri Sinergi Indonesia
-     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="receivable_follow_up_module_category" model="ir.module.category">
         <field name="name">Receivable Follow Up</field>
     </record>
 
     <!-- Workflow -->
-    <record id="receivable_follow_up_workflow_module_category" model="ir.module.category">
+    <record
+        id="receivable_follow_up_workflow_module_category"
+        model="ir.module.category"
+    >
         <field name="name">Receivable Follow Up - Workflow</field>
         <field name="parent_id" ref="receivable_follow_up_module_category" />
     </record>

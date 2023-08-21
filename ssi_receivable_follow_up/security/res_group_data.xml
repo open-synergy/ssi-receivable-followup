@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2023 OpenSynergy Indonesia
      Copyright 2023 PT. Simetri Sinergi Indonesia
-     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="receivable_follow_up_type_group" model="res.groups">
         <field name="name">Receivable Follow Up Type</field>
@@ -33,7 +33,10 @@
     <record id="receivable_follow_up_validator_group" model="res.groups">
         <field name="name">Validator</field>
         <field name="category_id" ref="receivable_follow_up_workflow_module_category" />
-        <field name="implied_ids" eval="[(4, ref('receivable_follow_up_user_group'))]" />
+        <field
+            name="implied_ids"
+            eval="[(4, ref('receivable_follow_up_user_group'))]"
+        />
         <field
             name="users"
             eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"

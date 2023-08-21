@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--Copyright 2023 OpenSynergy Indonesia-->
 <!--Copyright 2023 PT. Simetri Sinergi Indonesia-->
-<!--License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).-->
+<!--License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).-->
 <odoo>
     <record id="receivable_follow_up_view_tree" model="ir.ui.view">
         <field name="name">receivable_follow_up - Tree</field>
@@ -77,7 +77,7 @@
                         <field name="detail_ids" force_save="1">
                             <tree>
                                 <field name="invoice_id" />
-                                <field name="partner_id"/>
+                                <field name="partner_id" />
                                 <field name="date_invoice" />
                                 <field name="date_due" />
                                 <field name="amount_total" />
@@ -89,7 +89,7 @@
                                 <group name="form_receivable" colspan="4" col="2">
                                     <group name="form_receivable1" colspan="1" col="2">
                                         <field name="invoice_id" />
-                                        <field name="partner_id"/>
+                                        <field name="partner_id" />
                                         <field name="date_invoice" />
                                         <field name="date_due" />
                                     </group>
