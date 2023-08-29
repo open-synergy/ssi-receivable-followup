@@ -190,6 +190,7 @@ class ReceivableFollowUp(models.Model):
             ("journal_id", "in", self.type_id.allowed_journal_ids.ids),
             ("account_id", "in", self.type_id.allowed_account_ids.ids),
             ("move_id.state", "=", "posted"),
+            ("invoice_id.date", "<=", self.date_end),
             ("invoice_id.days_overdue", ">=", self.type_id.min_date_due),
             ("invoice_id.days_overdue", "<=", self.type_id.max_date_due),
             ("invoice_id.collector_id.id", "=", self.collector_id.id),
