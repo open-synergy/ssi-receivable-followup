@@ -40,8 +40,6 @@
         <field name="arch" type="xml">
             <data>
                 <xpath expr="//field[@name='active']" position="after">
-                    <field name="min_date_due" />
-                    <field name="max_date_due" />
                     <field name="allowed_account_ids" widget="many2many_tags" />
                     <field name="allowed_journal_ids" widget="many2many_tags" />
                     <field name="allowed_collector_ids" widget="many2many_avatar" />

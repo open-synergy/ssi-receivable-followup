@@ -17,8 +17,10 @@ class AccountInvoice(models.Model):
     )
     def _compute_collector_id(self):
         for record in self:
-            result = record.manual_collector_id
-            if record.partner_id.commercial_partner_id.collector_id:
+            result = False
+            if record.manual_collector_id:
+                result = record.manual_collector_id
+            elif record.partner_id.commercial_partner_id.collector_id:
                 result = record.partner_id.commercial_partner_id.collector_id
             record.collector_id = result
 
