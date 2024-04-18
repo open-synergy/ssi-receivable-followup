@@ -31,5 +31,3 @@ class ReceivableFollowUpType(models.Model):
         column1="type_id",
         column2="account_id",
     )
-    max_date_due = fields.Integer(string="Max Date Due", required=True)
-    min_date_due = fields.Integer(string="Min Date Due", required=True)

@@ -4,7 +4,7 @@
 
 {
     "name": "Receivable Follow Up",
-    "version": "11.0.1.2.0",
+    "version": "11.0.2.0.0",
     "category": "Accounting",
     "website": "https://simetri-sinergi.id",
     "author": "PT. Simetri Sinergi Indonesia, OpenSynergy Indonesia",
@@ -13,6 +13,7 @@
     "depends": [
         "account",
         "account_invoice_day_overdue",
+        "account_move_line_latest_reconcilliation_date",
         "ssi_master_data_mixin",
         "ssi_transaction_confirm_mixin",
         "ssi_transaction_done_mixin",

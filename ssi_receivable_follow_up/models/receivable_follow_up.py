@@ -68,12 +68,22 @@ class ReceivableFollowUp(models.Model):
     date_start = fields.Date(
         string="Date Start",
         required=True,
-        readonly=False,
+        readonly=True,
+        states={
+            "draft": [
+                ("readonly", False),
+            ],
+        },
     )
     date_end = fields.Date(
         string="Date End",
         required=True,
-        readonly=False,
+        readonly=True,
+        states={
+            "draft": [
+                ("readonly", False),
+            ],
+        },
     )
 
     type_id = fields.Many2one(
@@ -81,12 +91,24 @@ class ReceivableFollowUp(models.Model):
         comodel_name="receivable_follow_up_type",
         required=True,
         ondelete="restrict",
+        readonly=True,
+        states={
+            "draft": [
+                ("readonly", False),
+            ],
+        },
     )
     currency_id = fields.Many2one(
         string="Currency",
         comodel_name="res.currency",
         required=True,
         ondelete="restrict",
+        readonly=True,
+        states={
+            "draft": [
+                ("readonly", False),
+            ],
+        },
     )
     allowed_collector_ids = fields.Many2many(
         string="Allowed Collectors",
@@ -99,6 +121,12 @@ class ReceivableFollowUp(models.Model):
         comodel_name="res.users",
         required=True,
         ondelete="restrict",
+        readonly=True,
+        states={
+            "draft": [
+                ("readonly", False),
+            ],
+        },
     )
     amount_due = fields.Monetary(
         string="Amount Due",
@@ -186,16 +214,34 @@ class ReceivableFollowUp(models.Model):
     def _prepare_move_line_criteria(self):
         self.ensure_one()
         result = [
-            ("reconciled", "=", False),
             ("journal_id", "in", self.type_id.allowed_journal_ids.ids),
             ("account_id", "in", self.type_id.allowed_account_ids.ids),
             ("move_id.state", "=", "posted"),
-            ("invoice_id.date", "<=", self.date_end),
-            ("invoice_id.days_overdue", ">=", self.type_id.min_date_due),
-            ("invoice_id.days_overdue", "<=", self.type_id.max_date_due),
+            ("date", "<=", self.date_end),
             ("invoice_id.collector_id.id", "=", self.collector_id.id),
+            ("date_maturity", "<=", self.date_end),
         ]
 
+        return result
+
+    @api.multi
+    def _prepare_paid_aml_citeria(self):
+        self.ensure_one()
+        result = self._prepare_move_line_criteria()
+        result += [
+            ("reconciled", "=", True),
+            ("latest_reconciliation_date", ">=", self.date_start),
+            ("latest_reconciliation_date", "<=", self.date_end),
+        ]
+        return result
+
+    @api.multi
+    def _prepare_unpaid_aml_citeria(self):
+        self.ensure_one()
+        result = self._prepare_move_line_criteria()
+        result += [
+            ("reconciled", "=", False),
+        ]
         return result
 
     @api.multi
@@ -207,7 +253,10 @@ class ReceivableFollowUp(models.Model):
     def _populate(self):
         self.ensure_one()
         self.detail_ids.unlink()
-        lines = self.env["account.move.line"].search(self._prepare_move_line_criteria())
+        lines = self.env["account.move.line"].search(self._prepare_paid_aml_citeria())
+        lines += self.env["account.move.line"].search(
+            self._prepare_unpaid_aml_citeria()
+        )
         for line in lines:
             residual = (
                 line.currency_id
