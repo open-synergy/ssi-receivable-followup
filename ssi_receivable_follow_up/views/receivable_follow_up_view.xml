@@ -36,7 +36,29 @@
         />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <data />
+            <data>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="type_id" />
+                    <field name="collector_id" />
+                </xpath>
+                <xpath expr="//filter[@name='grp_responsible']" position="after">
+                    <filter
+                        name="grp_type"
+                        string="Type"
+                        context="{'group_by':'type_id'}"
+                    />
+                    <filter
+                        name="grp_collector"
+                        string="Collector"
+                        context="{'group_by':'collector_id'}"
+                    />
+                    <filter
+                        name="grp_currency"
+                        string="Currency"
+                        context="{'group_by':'currency_id'}"
+                    />
+                </xpath>
+            </data>
         </field>
     </record>
 
