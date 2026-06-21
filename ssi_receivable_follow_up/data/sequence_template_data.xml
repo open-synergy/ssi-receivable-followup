@@ -2,9 +2,8 @@
 <!-- Copyright 2023 OpenSynergy Indonesia
      Copyright 2023 PT. Simetri Sinergi Indonesia
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-<odoo>
-    <data noupdate="1">
-        <record id="receivable_follow_up_sequence_template" model="sequence.template">
+<odoo noupdate="1">
+    <record id="receivable_follow_up_sequence_template" model="sequence.template">
             <field name="name">Standard</field>
             <field name="model_id" ref="model_receivable_follow_up" />
             <field name="sequence" eval="100" />
@@ -24,5 +23,4 @@
             <field name="add_custom_prefix" eval="0" />
             <field name="add_custom_suffix" eval="0" />
         </record>
-    </data>
 </odoo>

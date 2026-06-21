@@ -2,9 +2,8 @@
 <!-- Copyright 2023 OpenSynergy Indonesia
      Copyright 2023 PT. Simetri Sinergi Indonesia
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-<odoo>
-    <data noupdate="1">
-        <record id="receivable_follow_up_policy_template" model="policy.template">
+<odoo noupdate="1">
+    <record id="receivable_follow_up_policy_template" model="policy.template">
             <field name="name">Standard</field>
             <field name="model_id" ref="model_receivable_follow_up" />
             <field
@@ -229,5 +228,4 @@ if not document.approval_template_id:
             />
             <field name="restrict_additional" eval="0" />
         </record>
-    </data>
 </odoo>
