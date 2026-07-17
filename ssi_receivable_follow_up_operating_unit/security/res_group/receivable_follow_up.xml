@@ -6,12 +6,15 @@
 <record id="receivable_follow_up_ou_group" model="res.groups">
     <field name="name">Operating Unit</field>
     <field
-        name="category_id"
-        ref="ssi_receivable_follow_up.receivable_follow_up_data_ownership_module_category"
-    />
+            name="category_id"
+            ref="ssi_receivable_follow_up.receivable_follow_up_data_ownership_module_category"
+        />
 </record>
 
-<record id="ssi_receivable_follow_up.receivable_follow_up_company_group" model="res.groups">
+<record
+        id="ssi_receivable_follow_up.receivable_follow_up_company_group"
+        model="res.groups"
+    >
     <field name="implied_ids" eval="[(4, ref('receivable_follow_up_ou_group'))]" />
 </record>
 </odoo>
