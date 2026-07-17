@@ -19,6 +19,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [ssi_receivable_follow_up](ssi_receivable_follow_up/) | 14.0.1.0.1 |  | Receivable Follow Up
+[ssi_receivable_follow_up_operating_unit](ssi_receivable_follow_up_operating_unit/) | 14.0.1.0.0 |  | Receivable Follow Up + Operating Unit
 
 [//]: # (end addons)
 

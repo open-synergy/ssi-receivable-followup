@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-ssi_receivable_follow_up',
+        'odoo14-addon-ssi_receivable_follow_up_operating_unit',
     ],
     classifiers=[
         'Programming Language :: Python',
